@@ -7,10 +7,11 @@ defmodule Pushover.MixProject do
     [
       app: :pushover,
       version: @version,
-      elixir: "~> 1.4",
+      elixir: "~> 1.8",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
       package: package(),
+      description: description()
     ]
   end
 
@@ -20,7 +21,7 @@ defmodule Pushover.MixProject do
 
   def package do
     [
-      name: "pushover elixir",
+      name: "pushover",
       maintainers: ["Vlad Jebelev"],
       licenses: ["MIT"],
       links: %{"GitHub" => "https://github.com/vjebelev/pushover"}
@@ -37,13 +38,11 @@ defmodule Pushover.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      #      {:httpoison, "~> 1.4"},
-      #{:jason, "~> 1.1"},
       {:tesla, "~> 1.2.1"},
       {:google_gax, "~> 0.1.3"},
 
       # Docs
-      {:ex_doc, "~> 0.18.0", only: :dev, runtime: false}
+      {:ex_doc, "~> 0.21.0", only: :dev, runtime: false}
     ]
   end
 end

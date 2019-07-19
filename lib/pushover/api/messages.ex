@@ -21,7 +21,7 @@ defmodule Pushover.Api.Messages do
   *   `{:error, info}` on failure
   """
   @spec send(Tesla.Env.client(), String.t(), String.t(), Pushover.Model.Message.t()) ::
-        {:ok, nil} | {:error, Tesla.Env.t()}
+        {:ok, Pushover.Model.MessageResponse.t()} | {:error, Tesla.Env.t()}
   def send(connection, token, user, message) do
     request =
       Request.new()
