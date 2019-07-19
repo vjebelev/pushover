@@ -33,6 +33,6 @@ defmodule Pushover.Api.Messages do
 
     connection
     |> Connection.execute(request)
-    |> Response.decode()
+    |> Response.decode([struct: %Pushover.Model.MessageResponse{}])
   end
 end
