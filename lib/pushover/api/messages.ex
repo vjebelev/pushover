@@ -23,6 +23,22 @@ defmodule Pushover.Api.Messages do
   @spec send(Tesla.Env.client(), String.t(), String.t(), Pushover.Model.Message.t()) ::
         {:ok, Pushover.Model.MessageResponse.t()} | {:error, Tesla.Env.t()}
   def send(connection, token, user, message) do
+
+    optional_params_config = %{
+      :device => :query,
+      :title => :body,
+      :url => :query,
+      :url_title => :query,
+      :priority => :query,
+      :retry => :query,
+      :expire => :query,
+      :sound => :query,
+      :timestamp => :query,
+    }
+
+    keys = Enum.filter(Map.keys(message), fn x -> Enum.member?(Map.keys(optional_params_config), x) end)
+    optional_params = Keyword.new(keys, fn x -> {x, Map.fetch!(message, x)} end)
+
     request =
       Request.new()
       |> Request.method(:post)
@@ -30,6 +46,7 @@ defmodule Pushover.Api.Messages do
       |> Request.add_param(:query, :token, token)
       |> Request.add_param(:query, :user, user)
       |> Request.add_param(:body, :message, message.data)
+      |> Request.add_optional_params(optional_params_config, optional_params)
 
     connection
     |> Connection.execute(request)
