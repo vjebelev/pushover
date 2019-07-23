@@ -28,7 +28,12 @@ alias Pushover.{Connection, Model.Message, Api.Messages}
 conn = Connection.new()
 token = "APPLICATION_TOKEN"
 user = "USER_KEY"
-message = %Message{data: "Hello, World!"}
+message = %Message{
+  data: "Hello, World!",
+  device: "max,lesley,john",
+  title: "Meeting",
+  priority: 1
+}
 
 Messages.send(conn, token, user, message)
 
