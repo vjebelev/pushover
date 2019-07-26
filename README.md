@@ -9,7 +9,7 @@ The package can be installed by adding `pushover` to your list of dependencies i
 ```elixir
 def deps do
   [
-    {:pushover, "~> 0.0.1"}
+    {:pushover, "~> 0.2.0"}
   ]
 end
 ```
@@ -20,14 +20,24 @@ be found at [https://hexdocs.pm/pushover](https://hexdocs.pm/pushover).
 
 ## Usage
 
+Make sure Pushover user string and application tokens are setup in your config file (example below is for Elixir 1.9+), if using an older version use Mix.Config instead of Config.
+
+```elixir
+import Config
+
+config :pushover,
+  user: "YOUR_PUSHOVER_USER",
+  token: "YOUR_PUSHOVER_TOKEN"
+```
+
+Alternatively, use environment variables PUSHOVER_USER and PUSHOVER_TOKEN.
+
 To send a message via Pushover Message API:
 
 ```elixir
 alias Pushover.{Connection, Model.Message, Api.Messages}
   
 conn = Connection.new()
-token = "APPLICATION_TOKEN"
-user = "USER_KEY"
 message = %Message{
   data: "Hello, World!",
   device: "max,lesley,john",
@@ -35,6 +45,6 @@ message = %Message{
   priority: 1
 }
 
-Messages.send(conn, token, user, message)
+Messages.send(conn, message)
 
 ```
