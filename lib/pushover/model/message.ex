@@ -13,7 +13,7 @@ defmodule Pushover.Model.Message do
   *   'retry' (*type:* `integer()`, *default:* `nil`) - How often (in seconds) the Pushover servvers will send the same notification to the user.
   *   'expire' (*type:* `integer()`, *default:* `nil`) - How many seconds your notification will continue to be retried.
   *   `sound (*type:* `String.t`, *default:* `nil`) - The name of the sound to override the user's default sound choice.
-  *   `timestamp` - a Unix timestamp of your message's date and time to display to the user, rather than the time your message is received by Pushover's servers'.
+  *   `timestamp` (*type:* `integer()`, *default:* `nil`) - a Unix timestamp of your message's date and time to display to the user, rather than the time your message is received by Pushover's servers.
   """
 
   use GoogleApi.Gax.ModelBase
