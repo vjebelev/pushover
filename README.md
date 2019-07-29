@@ -9,7 +9,7 @@ The package can be installed by adding `pushover` to your list of dependencies i
 ```elixir
 def deps do
   [
-    {:pushover, "~> 0.2.0"}
+    {:pushover, "~> 0.3.0"}
   ]
 end
 ```
@@ -35,16 +35,13 @@ Alternatively, use environment variables PUSHOVER_USER and PUSHOVER_TOKEN.
 To send a message via Pushover Message API:
 
 ```elixir
-alias Pushover.{Connection, Model.Message, Api.Messages}
-  
-conn = Connection.new()
-message = %Message{
+message = %Pushover.Model.Message{
   data: "Hello, World!",
   device: "max,lesley,john",
   title: "Meeting",
   priority: 1
 }
 
-Messages.send(conn, message)
+Pushover.Api.Messages.send(message)
 
 ```

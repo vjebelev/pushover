@@ -11,16 +11,16 @@ defmodule Pushover.Api.Messages do
 
   ## Parameters
 
-  *   `connection` (*type:* `Pushover.Connection.t`) - Connection to server
   *   `message` (*type:* `Pushover.Model.Message`) - the message to send.
+  *   `connection` (*type:* `Pushover.Connection.t`) - Connection to server
 
   ## Returns
   *   `{:ok, %{}}` on success
   *   `{:error, info}` on failure
   """
-  @spec send(Tesla.Env.client(), Pushover.Model.Message.t()) ::
+  @spec send(Pushover.Model.Message.t()) ::
         {:ok, Pushover.Model.MessageResponse.t()} | {:error, Tesla.Env.t()}
-  def send(connection, message) do
+  def send(message, connection \\ Connection.new) do
 
     optional_params_config = %{
       :device => :query,
