@@ -18,10 +18,9 @@ defmodule Pushover.Api.Messages do
   *   `{:ok, %{}}` on success
   *   `{:error, info}` on failure
   """
-  @spec send(Pushover.Model.Message.t()) ::
-        {:ok, Pushover.Model.MessageResponse.t()} | {:error, Tesla.Env.t()}
-  def send(message, connection \\ Connection.new) do
-
+  @spec send(Pushover.Model.Message.t(), Pushover.Connection.t()) ::
+          {:ok, Pushover.Model.MessageResponse.t()} | {:error, Tesla.Env.t()}
+  def send(message, connection \\ Connection.new()) do
     optional_params_config = %{
       :device => :query,
       :title => :body,
@@ -31,10 +30,12 @@ defmodule Pushover.Api.Messages do
       :retry => :query,
       :expire => :query,
       :sound => :query,
-      :timestamp => :query,
+      :timestamp => :query
     }
 
-    keys = Enum.filter(Map.keys(message), fn x -> Enum.member?(Map.keys(optional_params_config), x) end)
+    keys =
+      Enum.filter(Map.keys(message), fn x -> Enum.member?(Map.keys(optional_params_config), x) end)
+
     optional_params = Keyword.new(keys, fn x -> {x, Map.fetch!(message, x)} end)
 
     request =
@@ -48,6 +49,6 @@ defmodule Pushover.Api.Messages do
 
     connection
     |> Connection.execute(request)
-    |> Response.decode([struct: %Pushover.Model.MessageResponse{}])
+    |> Response.decode(struct: %Pushover.Model.MessageResponse{})
   end
 end
