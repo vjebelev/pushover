@@ -9,7 +9,7 @@ The package can be installed by adding `pushover` to your list of dependencies i
 ```elixir
 def deps do
   [
-    {:pushover, "~> 0.3.0"}
+    {:pushover, "~> 0.3.1"}
   ]
 end
 ```
