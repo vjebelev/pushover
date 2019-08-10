@@ -9,7 +9,7 @@ The package can be installed by adding `pushover` to your list of dependencies i
 ```elixir
 def deps do
   [
-    {:pushover, "~> 0.3.1"}
+    {:pushover, "~> 0.3.2"}
   ]
 end
 ```
@@ -23,7 +23,7 @@ be found at [https://hexdocs.pm/pushover](https://hexdocs.pm/pushover).
 Make sure Pushover user string and application tokens are setup in your config file (example below is for Elixir 1.9+), if using an older version use Mix.Config instead of Config.
 
 ```elixir
-import Config
+use Mix.Config
 
 config :pushover,
   user: "YOUR_PUSHOVER_USER",

@@ -1,13 +1,13 @@
 defmodule Pushover.MixProject do
   use Mix.Project
 
-  @version "0.3.1"
+  @version "0.3.2"
 
   def project do
     [
       app: :pushover,
       version: @version,
-      elixir: "~> 1.9",
+      elixir: "~> 1.4",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
       package: package(),
